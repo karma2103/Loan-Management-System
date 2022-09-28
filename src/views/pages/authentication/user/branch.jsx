@@ -1,4 +1,4 @@
-import React from "react";
+import React  from "react";
 import MUIDataTable from "mui-datatables";
 import { Box } from "@mui/system";
 import EditIcon from "@mui/icons-material/Edit";
@@ -25,14 +25,29 @@ const columns = [
     },
   },
   {
-    name: "name",
-    label: "Permission Name",
+    name: "code",
+    label: "Branch Code",
     options: {
       filter: true,
       sort: true,
     },
   },
-
+  {
+    name: "name",
+    label: "Branch Name",
+    options: {
+      filter: true,
+      sort: true,
+    },
+  },
+  {
+    name: "location",
+    label: "Branch Location",
+    options: {
+      filter: true,
+      sort: true,
+    },
+  },
   {
     name: "Action",
     options: {
@@ -52,10 +67,10 @@ const columns = [
 ];
 
 const data = [
-  { id: 1, name: "USer-List" },
-  { id: 2, name: "User-Create" },
-  { id: 3, name: "User-delete" },
-  { id: 4, name: "RoleList" },
+  { id: 1,code:'PA',  name: "Paro", location:'Paro' },
+  { id: 2,code:'HA',  name: "Ha", location:'HA' },
+  { id: 3,code:'TH',  name: "Thimphu", location:'Thimphu' },
+  { id: 4,code:'MO',  name: "Mongar", location:'mongar' },
 ];
 
 const options = {
@@ -73,7 +88,7 @@ const useStyles = makeStyles({
     textAlign: "center",
   },
 });
-export default function DataTable() {
+export default function Branch() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = React.useState("paper");
@@ -88,7 +103,7 @@ export default function DataTable() {
   };
   return (
     <MainCard
-      title="Permission List"
+      title="Branch List"
       secondary={
         <Button onClick={handleClickOpen("body")} sx={{ border: "1px solid" }}>
           Create
@@ -122,7 +137,7 @@ export default function DataTable() {
                 <Grid item xs={12} sm={12}>
                   <TextField
                     fullWidth
-                    label="Permission List"
+                    label="Branch Name"
                     name="name"
                     type="text"
                     autoFocus

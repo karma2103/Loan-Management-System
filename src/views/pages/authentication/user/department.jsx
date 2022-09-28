@@ -24,9 +24,18 @@ const columns = [
       sort: false,
     },
   },
+  
+  {
+    name: "departName",
+    label: "Department Code",
+    options: {
+      filter: true,
+      sort: true,
+    },
+  },
   {
     name: "name",
-    label: "Permission Name",
+    label: "Department Name",
     options: {
       filter: true,
       sort: true,
@@ -52,10 +61,13 @@ const columns = [
 ];
 
 const data = [
-  { id: 1, name: "USer-List" },
-  { id: 2, name: "User-Create" },
-  { id: 3, name: "User-delete" },
-  { id: 4, name: "RoleList" },
+  { id: 1,departName:'IT', name: "IT Department" },
+  { id: 2,departName:'INV', name: "Investment Department" },
+  { id: 3,departName:'UN', name: "Underwriting DEpartment" },
+  { id: 4,departName:'CL', name: "Claims Department" },
+  { id: 5,departName:'ME', name: "Media Section" },
+  { id: 6,departName:'RE', name: "Renewal Department" },
+  { id: 7,departName:'FA', name: "Finance Department" },
 ];
 
 const options = {
@@ -73,7 +85,7 @@ const useStyles = makeStyles({
     textAlign: "center",
   },
 });
-export default function DataTable() {
+export default function Department() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = React.useState("paper");
@@ -88,7 +100,7 @@ export default function DataTable() {
   };
   return (
     <MainCard
-      title="Permission List"
+      title="Department List"
       secondary={
         <Button onClick={handleClickOpen("body")} sx={{ border: "1px solid" }}>
           Create
@@ -122,7 +134,7 @@ export default function DataTable() {
                 <Grid item xs={12} sm={12}>
                   <TextField
                     fullWidth
-                    label="Permission List"
+                    label="Department Name"
                     name="name"
                     type="text"
                     autoFocus

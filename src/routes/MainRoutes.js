@@ -35,6 +35,12 @@ const Role = Loadable(
 const Permission = Loadable(
   lazy(() => import("views/pages/authentication/user/permission"))
 );
+const Department = Loadable(
+  lazy(() => import("views/pages/authentication/user/department"))
+);
+const Branch = Loadable(
+  lazy(() => import("views/pages/authentication/user/branch"))
+);
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
@@ -46,16 +52,24 @@ const MainRoutes = {
       element: <DashboardDefault />,
     },
     {
-      path: "/user",
+      path: "/dashboard/user",
       element: <User />,
     },
     {
-      path: "/role",
+      path: "/dashboard/role",
       element: <Role />,
     },
     {
-      path: "/permission",
+      path: "/dashboard/permission",
       element: <Permission />,
+    },
+    {
+      path: "/dashboard/department",
+      element: <Department />,
+    },
+    {
+      path: "/dashboard/branch",
+      element: <Branch />,
     },
 
     {
