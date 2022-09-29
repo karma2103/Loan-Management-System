@@ -12,7 +12,7 @@ const Department = Loadable(lazy(() => import("views/pages/authentication/user/d
 const Branch = Loadable(lazy(() => import("views/pages/authentication/user/branch")));
 // ==============================|| AUTHENTICATION ROUTING ||============================== //
 
-const AuthenticationRoutes = {
+const Users = {
   path: "/",
   element: <MinimalLayout />,
   children: [
@@ -39,4 +39,4 @@ const AuthenticationRoutes = {
   ],
 };
 
-export default AuthenticationRoutes;
+export default Users;

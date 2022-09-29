@@ -41,7 +41,7 @@ const Login = () => {
                                         <Grid item container direction="column" alignItems="center" xs={12}>
                                             <Typography
                                                 component={Link}
-                                                to="/register"
+                                                to="/Lms/register"
                                                 variant="subtitle1"
                                                 sx={{ textDecoration: 'none' }}
                                             >

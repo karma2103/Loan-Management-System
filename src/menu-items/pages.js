@@ -18,17 +18,17 @@ const icons = {
 
 const pages = {
     id: 'pages',
-    title: 'Pages',
+    title: 'Authentication',
     type: 'group',
     children: [
         {
-            id: 'authentication',
+            id: 'page',
             title: 'Users',
             type: 'collapse',
             icon: icons.GroupAddOutlinedIcon,
             children: [
                 {
-                    id: 'login3',
+                    id: 'user',
                     title: 'User',
                     type: 'item',
                     url: '/dashboard/user',
@@ -54,7 +54,7 @@ const pages = {
             ],
         },
         {
-            id: 'authentication',
+            id: 'pages',
             title: 'Master Setup',
             type: 'collapse',
             icon: icons.SchoolOutlinedIcon,
