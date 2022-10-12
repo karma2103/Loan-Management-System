@@ -97,7 +97,7 @@ const FirebaseLogin = ({ ...others }) => {
         >
           <Box sx={{ mb: 2, mt: -5 }}>
             <Typography variant="subtitle1">
-              Sign in with Email address
+              Sign in with User ID
             </Typography>
           </Box>
         </Grid>
@@ -105,12 +105,12 @@ const FirebaseLogin = ({ ...others }) => {
 
       <Formik
         initialValues={{
-          email: "",
+          userID: "",
           password: "",
           submit: null,
         }}
         validationSchema={Yup.object().shape({
-          email: Yup.string()
+          userID: Yup.string()
             .email("Must be a valid email")
             .max(255)
             .required("Email is required"),
@@ -160,6 +160,7 @@ const FirebaseLogin = ({ ...others }) => {
                 onChange={handleChange}
                 label="Employee ID"
                 size="small"
+                autoComplete="off"
               />
               {touched.email && errors.email && (
                 <FormHelperText
