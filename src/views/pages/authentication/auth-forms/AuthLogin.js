@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useContext, useState } from "react";
 
 // material-ui
 import { useTheme } from "@mui/material/styles";
@@ -34,8 +34,10 @@ import AnimateButton from "ui-component/extended/AnimateButton";
 // assets
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import MainCard from "ui-component/cards/MainCard";
 
+//auth
+import AuthContext from "../../../../contexts/JWTAuthContexts";
+import MainCard from "ui-component/cards/MainCard";
 // ============================|| FIREBASE - LOGIN ||============================ //
 
 const FirebaseLogin = ({ ...others }) => {
@@ -43,6 +45,7 @@ const FirebaseLogin = ({ ...others }) => {
   const scriptedRef = useScriptRef();
   const [checked, setChecked] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
+  const { setAuth } = useContext(AuthContext);
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -51,7 +54,25 @@ const FirebaseLogin = ({ ...others }) => {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-  //forgot Password
+
+  const login = (user, password) => {
+    console.log({ user: user, password: password });
+    try {
+      // const response = await.axios.post();
+      // setAuth({user,password,accessToken})
+    } catch (error) {
+      if (!error.response) {
+      } else if (error.response?.status === 400) {
+        console.log("Misss match user name and password");
+      } else if (error.response?.status === 401) {
+        console.log("unauthorized");
+      } else {
+        console.log("Login failed");
+      }
+    }
+  };
+
+  // Forgot Password
   const [open, setOpen] = useState(false);
   const [scroll, setScroll] = useState("paper");
 
@@ -99,6 +120,7 @@ const FirebaseLogin = ({ ...others }) => {
           try {
             if (scriptedRef.current) {
               setStatus({ success: true });
+              login(values.email, values.password);
               setSubmitting(false);
             }
           } catch (err) {
@@ -206,12 +228,11 @@ const FirebaseLogin = ({ ...others }) => {
                 }
                 label="Remember me"
               />
-
               <Typography
                 variant="subtitle1"
                 color="secondary"
                 sx={{ textDecoration: "none", cursor: "pointer" }}
-                onClick={handleClick('body')}
+                onClick={handleClick("body")}
               >
                 Forgot Password?
               </Typography>
@@ -227,22 +248,22 @@ const FirebaseLogin = ({ ...others }) => {
                   },
                 }}
               >
-               <DialogContent sx={{ width: "500px" }}>
-                <DialogContentText>
+                <DialogContent sx={{ width: "500px" }}>
+                  <DialogContentText>
                     <MainCard title="Forgot Password">
-                    <Grid container spacing={2}>
+                      <Grid container spacing={2}>
                         <Grid item xs={12} sm={12}>
-                        <TextField
+                          <TextField
                             fullWidth
-                            label="Enter Email Address"
-                            name="email"
+                            label="Email Address"
+                            name="name"
                             type="text"
                             autoFocus
-                        />
+                          />
                         </Grid>
-                    </Grid>
+                      </Grid>
                     </MainCard>
-                </DialogContentText>
+                  </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                   <Button onClick={handleClose} variant="outlined" color="info">
@@ -250,7 +271,6 @@ const FirebaseLogin = ({ ...others }) => {
                   </Button>
 
                   <Button
-                    // onClick={handleClose}
                     type="submit"
                     variant="outlined"
                     color="secondary"
