@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -30,8 +30,8 @@ import AnimateButton from 'ui-component/extended/AnimateButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-
-
+//auth
+import AuthContext from '../../../../contexts/JWTAuthContexts'
 // ============================|| FIREBASE - LOGIN ||============================ //
 
 const FirebaseLogin = ({ ...others }) => {
@@ -39,6 +39,7 @@ const FirebaseLogin = ({ ...others }) => {
     const scriptedRef = useScriptRef();
     const [checked, setChecked] = useState(true);
     const [showPassword, setShowPassword] = useState(false);
+    const { setAuth } = useContext(AuthContext);
 
     const handleClickShowPassword = () => {
         setShowPassword(!showPassword);
@@ -47,6 +48,27 @@ const FirebaseLogin = ({ ...others }) => {
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
+
+    const login = (user,password)=>{
+     console.log({user:user,password:password});
+     try{
+        // const response = await.axios.post();
+        // setAuth({user,password,accessToken})
+     }catch(error){
+        if(!error.response){ 
+
+        }else if(error.response?.status === 400){
+           console.log("Misss match user name and password");
+        }else if (error.response?.status === 401){
+            console.log("unauthorized");
+        }else{
+            console.log("Login failed");
+        }
+     }
+    
+
+    }
+
 
     return (
         <>
@@ -73,6 +95,7 @@ const FirebaseLogin = ({ ...others }) => {
                     try {
                         if (scriptedRef.current) {
                             setStatus({ success: true });
+                            login(values.email, values.password);
                             setSubmitting(false);
                         }
                     } catch (err) {

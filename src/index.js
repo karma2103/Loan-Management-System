@@ -12,12 +12,16 @@ import { store } from 'store';
 // style + assets
 import 'assets/scss/style.scss';
 
+//authProvider
+import { AuthProvider } from './contexts/JWTAuthContexts'
 // ==============================|| REACT DOM RENDER  ||============================== //
 
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
+         <AuthProvider>
             <App />
+        </AuthProvider>
         </BrowserRouter>
     </Provider>,
     document.getElementById('root')
