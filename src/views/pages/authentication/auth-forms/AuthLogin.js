@@ -41,41 +41,15 @@ import MainCard from "ui-component/cards/MainCard";
 // ============================|| FIREBASE - LOGIN ||============================ //
 
 const FirebaseLogin = ({ ...others }) => {
-  const theme = useTheme();
+    const theme = useTheme();
+    // Forgot Password
+  const [open, setOpen] = useState(false);
+  const [scroll, setScroll] = useState("paper");
+
   const scriptedRef = useScriptRef();
   const [checked, setChecked] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const { setAuth } = useContext(AuthContext);
-
-  const handleClickShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
-
-  const login = (user, password) => {
-    console.log({ user: user, password: password });
-    try {
-      // const response = await.axios.post();
-      // setAuth({user,password,accessToken})
-    } catch (error) {
-      if (!error.response) {
-      } else if (error.response?.status === 400) {
-        console.log("Misss match user name and password");
-      } else if (error.response?.status === 401) {
-        console.log("unauthorized");
-      } else {
-        console.log("Login failed");
-      }
-    }
-  };
-
-  // Forgot Password
-  const [open, setOpen] = useState(false);
-  const [scroll, setScroll] = useState("paper");
-
   const handleClick = (scrollType) => () => {
     setOpen(true);
     setScroll(scrollType);
@@ -84,6 +58,19 @@ const FirebaseLogin = ({ ...others }) => {
   const handleClose = () => {
     setOpen(false);
   };
+  
+    const handleClickShowPassword = () => {
+        setShowPassword(!showPassword);
+    };
+
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
+
+    const login = (user,password)=>{
+        setAuth({user,password})
+    }
+  
 
   return (
     <>
