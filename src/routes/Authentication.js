@@ -21,7 +21,8 @@ const Authentication = {
         {
             path: '/Lms/register',
             element: <AuthRegister3 />
-        }
+        },
+        
     ]
 };
 
