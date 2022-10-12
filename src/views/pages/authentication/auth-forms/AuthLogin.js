@@ -50,23 +50,7 @@ const FirebaseLogin = ({ ...others }) => {
     };
 
     const login = (user,password)=>{
-     console.log({user:user,password:password});
-     try{
-        // const response = await.axios.post();
-        // setAuth({user,password,accessToken})
-     }catch(error){
-        if(!error.response){ 
-
-        }else if(error.response?.status === 400){
-           console.log("Misss match user name and password");
-        }else if (error.response?.status === 401){
-            console.log("unauthorized");
-        }else{
-            console.log("Login failed");
-        }
-     }
-    
-
+        setAuth({user,password})
     }
 
 
