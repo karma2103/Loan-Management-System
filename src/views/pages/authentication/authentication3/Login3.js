@@ -8,7 +8,7 @@ import { Divider, Grid, Typography } from '@mui/material';
 import AuthWrapper1 from '../AuthWrapper1';
 import LoginCardWrapper from '../LoginCardWrapper';
 import AuthLogin from '../auth-forms/AuthLogin';
-import Logo from '../../../../assets/images/icons/logo.png';
+import Logo from '../../../../assets/images/icons/dzongkhag.png';
 import AuthFooter from 'ui-component/cards/AuthFooter';
 
 // assets
@@ -27,7 +27,7 @@ const Login = () => {
                                 <Grid container spacing={2} alignItems="center" justifyContent="center">
                                     <Grid item sx={{ mb: 3 }}>
                                         <Link to="#">
-                                            <img src={Logo} alt="" width={200} />
+                                            <img src={Logo} alt="" width={300} />
                                         </Link>
                                     </Grid>
                                     

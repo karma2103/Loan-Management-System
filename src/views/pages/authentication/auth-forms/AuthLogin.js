@@ -38,18 +38,21 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 //auth
 import AuthContext from "../../../../contexts/JWTAuthContexts";
 import MainCard from "ui-component/cards/MainCard";
+import axios from "axios";
+import { useNavigate } from "react-router";
 // ============================|| FIREBASE - LOGIN ||============================ //
 
 const FirebaseLogin = ({ ...others }) => {
-    const theme = useTheme();
-    // Forgot Password
+  const theme = useTheme();
+  // Forgot Password
   const [open, setOpen] = useState(false);
   const [scroll, setScroll] = useState("paper");
-
+  const navigate = useNavigate();
   const scriptedRef = useScriptRef();
   const [checked, setChecked] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const { setAuth } = useContext(AuthContext);
+
   const handleClick = (scrollType) => () => {
     setOpen(true);
     setScroll(scrollType);
@@ -58,57 +61,49 @@ const FirebaseLogin = ({ ...others }) => {
   const handleClose = () => {
     setOpen(false);
   };
-  
-    const handleClickShowPassword = () => {
-        setShowPassword(!showPassword);
-    };
 
-    const handleMouseDownPassword = (event) => {
-        event.preventDefault();
-    };
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
 
-    const login = (user,password)=>{
-        setAuth({user,password})
-    }
-  
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
+  const login = async (user_id, password) => {
+    try {
+      const response = await axios.post("http://127.0.0.1:8000/api/login", {
+        user_id,
+        password,
+      });
+
+      if (response?.data.payload.user_status === "inActive") {
+        navigate("/");
+      }
+      const { accessToken } = response.data.access_token;
+      setAuth({ user_id, password, accessToken });
+    } catch (error) {}
+  };
 
   return (
     <>
-      <Grid container direction="column" justifyContent="center" spacing={2}>
-        <Grid
-          item
-          xs={12}
-          container
-          alignItems="center"
-          justifyContent="center"
-        >
-          <Box sx={{ mb: 2, mt: -5 }}>
-            <Typography variant="subtitle1">
-              Sign in with User ID
-            </Typography>
-          </Box>
-        </Grid>
-      </Grid>
-
+     
       <Formik
         initialValues={{
-          userID: "",
+          user_id: "",
           password: "",
           submit: null,
         }}
         validationSchema={Yup.object().shape({
-          userID: Yup.string()
-            .email("Must be a valid email")
-            .max(255)
-            .required("Email is required"),
+          user_id: Yup.string().max(255).required("Email is required"),
           password: Yup.string().max(255).required("Password is required"),
         })}
         onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
           try {
             if (scriptedRef.current) {
               setStatus({ success: true });
-              login(values.email, values.password);
-              setSubmitting(false);
+              login(values.user_id, values.password);
+              setSubmitting(true);
             }
           } catch (err) {
             console.error(err);
@@ -132,7 +127,7 @@ const FirebaseLogin = ({ ...others }) => {
           <form noValidate onSubmit={handleSubmit} {...others}>
             <FormControl
               fullWidth
-              error={Boolean(touched.email && errors.email)}
+              error={Boolean(touched.user_id && errors.user_id)}
               sx={{ ...theme.typography.customInput }}
             >
               <InputLabel htmlFor="outlined-adornment-email-login">
@@ -141,20 +136,20 @@ const FirebaseLogin = ({ ...others }) => {
               <OutlinedInput
                 id="outlined-adornment-email-login"
                 type="text"
-                value={values.email}
-                name="email"
+                value={values.user_id}
+                name="user_id"
                 onBlur={handleBlur}
                 onChange={handleChange}
                 label="Employee ID"
                 size="small"
                 autoComplete="off"
               />
-              {touched.email && errors.email && (
+              {touched.user_id && errors.user_id && (
                 <FormHelperText
                   error
                   id="standard-weight-helper-text-email-login"
                 >
-                  {errors.email}
+                  {errors.user_id}
                 </FormHelperText>
               )}
             </FormControl>
@@ -258,11 +253,7 @@ const FirebaseLogin = ({ ...others }) => {
                     Cancel
                   </Button>
 
-                  <Button
-                    type="submit"
-                    variant="outlined"
-                    color="secondary"
-                  >
+                  <Button type="submit" variant="outlined" color="secondary">
                     Submit
                   </Button>
                 </DialogActions>
