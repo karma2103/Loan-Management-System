@@ -38,6 +38,9 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 //auth
 import AuthContext from "../../../../contexts/JWTAuthContexts";
 import MainCard from "ui-component/cards/MainCard";
+
+//loginFun
+import {login}  from '../../../../Api/access';
 // ============================|| FIREBASE - LOGIN ||============================ //
 
 const FirebaseLogin = ({ ...others }) => {
@@ -67,8 +70,17 @@ const FirebaseLogin = ({ ...others }) => {
         event.preventDefault();
     };
 
-    const login = (user,password)=>{
-        setAuth({user,password})
+    const userlogin = (user,password)=>{
+      const crediential = {user,password}
+      login(crediential).then((response)=>{
+        if(!response.ok) throw new Error(response.status);
+        else return response.json();
+      }).then((data)=>{
+        const { accessToken } = data.data;
+        setAuth({accessToken})
+      }).catch((error)=>{
+         console.log(error.message)
+      });
     }
   
 
@@ -107,7 +119,7 @@ const FirebaseLogin = ({ ...others }) => {
           try {
             if (scriptedRef.current) {
               setStatus({ success: true });
-              login(values.email, values.password);
+              userlogin(values.email, values.password);
               setSubmitting(false);
             }
           } catch (err) {
