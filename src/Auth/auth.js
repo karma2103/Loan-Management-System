@@ -30,17 +30,7 @@ const AuthGuard = ({ children }) => {
   // // UNCOMMENT ABOVE LINES
   // // AND COMMENT OUT BELOW authenticated VARIABLE
 
-  let authenticated = isAuthenticated;
 
-  return (
-    <>
-      {authenticated ? (
-        children
-      ) : (
-        <Navigate replace to="/session/signin" state={{ from: pathname }} />
-      )}
-    </>
-  );
 };
 
 export default AuthGuard;

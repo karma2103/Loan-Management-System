@@ -70,15 +70,18 @@ const FirebaseLogin = ({ ...others }) => {
         event.preventDefault();
     };
 
-    const userlogin = (user,password)=>{
-      const crediential = {user,password}
+    const userlogin = (user_id,password)=>{
+      const crediential = {user_id,password}
       login(crediential).then((response)=>{
-        if(!response.ok) throw new Error(response.status);
-        else return response.json();
-      }).then((data)=>{
-        const { accessToken } = data.data;
-        setAuth({accessToken})
-      }).catch((error)=>{
+        console.log(response);
+        if(!response.status === 200) throw new Error(response.status);
+        else {
+          const accessToken  = response['data'].access_token;
+          console.log(accessToken)
+          setAuth(response['data'].access_token)
+        };
+      })
+        .catch((error)=>{
          console.log(error.message)
       });
     }
@@ -96,7 +99,7 @@ const FirebaseLogin = ({ ...others }) => {
         >
           <Box sx={{ mb: 2, mt: -5 }}>
             <Typography variant="subtitle1">
-              Sign in with Email address
+              Sign in with user_id address
             </Typography>
           </Box>
         </Grid>
@@ -104,22 +107,21 @@ const FirebaseLogin = ({ ...others }) => {
 
       <Formik
         initialValues={{
-          email: "",
+          user_id: "",
           password: "",
           submit: null,
         }}
         validationSchema={Yup.object().shape({
-          email: Yup.string()
-            .email("Must be a valid email")
+          user_id: Yup.string()
             .max(255)
-            .required("Email is required"),
+            .required("user_id is required"),
           password: Yup.string().max(255).required("Password is required"),
         })}
         onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
           try {
             if (scriptedRef.current) {
               setStatus({ success: true });
-              userlogin(values.email, values.password);
+              userlogin(values.user_id, values.password);
               setSubmitting(false);
             }
           } catch (err) {
@@ -144,28 +146,28 @@ const FirebaseLogin = ({ ...others }) => {
           <form noValidate onSubmit={handleSubmit} {...others}>
             <FormControl
               fullWidth
-              error={Boolean(touched.email && errors.email)}
+              error={Boolean(touched.user_id && errors.user_id)}
               sx={{ ...theme.typography.customInput }}
             >
-              <InputLabel htmlFor="outlined-adornment-email-login">
+              <InputLabel htmlFor="outlined-adornment-user_id-login">
                 Employee ID
               </InputLabel>
               <OutlinedInput
-                id="outlined-adornment-email-login"
+                id="outlined-adornment-user_id-login"
                 type="text"
-                value={values.email}
-                name="email"
+                value={values.user_id}
+                name="user_id"
                 onBlur={handleBlur}
                 onChange={handleChange}
                 label="Employee ID"
                 size="small"
               />
-              {touched.email && errors.email && (
+              {touched.user_id && errors.user_id && (
                 <FormHelperText
                   error
-                  id="standard-weight-helper-text-email-login"
+                  id="standard-weight-helper-text-user_id-login"
                 >
-                  {errors.email}
+                  {errors.user_id}
                 </FormHelperText>
               )}
             </FormControl>
@@ -254,7 +256,7 @@ const FirebaseLogin = ({ ...others }) => {
                         <Grid item xs={12} sm={12}>
                           <TextField
                             fullWidth
-                            label="Email Address"
+                            label="user_id Address"
                             name="name"
                             type="text"
                             autoFocus

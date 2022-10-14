@@ -1,18 +1,7 @@
-<<<<<<< HEAD
-import React, { createContext, useEffect, useState } from "react";
-import axios from "axios";
-import jwtDecode from "jwt-decode";
-import { useNavigate } from "react-router";
-
-const setSession = (accessToken) => {
-  if (accessToken) {
-    localStorage.setItem("accessToken", accessToken);
-    axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
-  } else {
-    localStorage.removeItem("accessToken");
-=======
-import {createContext,useState} from 'react';
+import React,{createContext,useState,useEffect} from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router';
+import jwtDecode from 'jwt-decode';
 
 const setSession = (accessToken) => {
   if (accessToken) {
@@ -20,12 +9,10 @@ const setSession = (accessToken) => {
     axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
   } else {
     localStorage.removeItem('accessToken');
->>>>>>> bed6ebcc0a2526936e2f60b0abe5b7379789f75d
     delete axios.defaults.headers.common.Authorization;
   }
 };
 
-<<<<<<< HEAD
 const isValidToken = (accessToken) => {
   if (!accessToken) {
     return false;
@@ -41,15 +28,19 @@ const AuthContext = createContext({});
 export const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState({});
   const navigate = useNavigate();
-  setSession(auth);
+  
+  if ( Object.keys(auth).length !==0) {
+    setSession(auth);
+  }
 
   useEffect(() => {
-    (async () => {
+    ( () => {
       try {
         const accessToken = window.localStorage.getItem("accessToken");
         if (accessToken && isValidToken(accessToken)) {
-          setSession(accessToken);
           navigate("/");
+        }else{
+          navigate("/Lms/login");
         }
       } catch (err) {
         console.error(err);
@@ -58,23 +49,11 @@ export const AuthProvider = ({ children }) => {
     })();
   }, []);
 
-=======
- const AuthContext = createContext({
- });
-
- export const AuthProvider = ({ children }) => {
-  const [auth, setAuth] = useState({});
-  setSession(auth.accessToken)
->>>>>>> bed6ebcc0a2526936e2f60b0abe5b7379789f75d
   return (
     <AuthContext.Provider value={{ auth, setAuth }}>
       {children}
     </AuthContext.Provider>
   );
-<<<<<<< HEAD
 };
 
-=======
-}
->>>>>>> bed6ebcc0a2526936e2f60b0abe5b7379789f75d
 export default AuthContext;

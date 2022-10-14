@@ -1,11 +1,13 @@
 
 import axios from "axios";
-    // const Api = process.env.REACT_APP_API_KEY;
+   const Api = process.env.REACT_APP_API_KEY;
   //login
   const login=({...crediential})=> {
-  console.log(crediential);
-    // return axios.post(`${Api}/user_login`, crenditial);
-  };
+    console.log(crediential)
+  console.log(`http://127.0.0.1:8000/api/login`, crediential);
+
+     return axios.post(`http://127.0.0.1:8000/api/login`, crediential)
+  }
   const access2=()=> {
     // console.log("crenditial2");
     // return axios.post(`${Api}/user_login`, crenditial);
