@@ -41,6 +41,7 @@ import MainCard from "ui-component/cards/MainCard";
 
 //loginFun
 import {login}  from '../../../../Api/access';
+import { useNavigate } from "react-router";
 // ============================|| FIREBASE - LOGIN ||============================ //
 
 const FirebaseLogin = ({ ...others }) => {
@@ -48,7 +49,7 @@ const FirebaseLogin = ({ ...others }) => {
     // Forgot Password
   const [open, setOpen] = useState(false);
   const [scroll, setScroll] = useState("paper");
-
+  const navigate = useNavigate();
   const scriptedRef = useScriptRef();
   const [checked, setChecked] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
@@ -73,12 +74,10 @@ const FirebaseLogin = ({ ...others }) => {
     const userlogin = (user_id,password)=>{
       const crediential = {user_id,password}
       login(crediential).then((response)=>{
-        console.log(response);
         if(!response.status === 200) throw new Error(response.status);
         else {
-          const accessToken  = response['data'].access_token;
-          console.log(accessToken)
           setAuth(response['data'].access_token)
+          navigate('/');
         };
       })
         .catch((error)=>{

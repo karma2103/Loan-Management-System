@@ -1,11 +1,8 @@
 
 import axios from "axios";
-   const Api = process.env.REACT_APP_API_KEY;
+  // const Api = process.env.REACT_APP_API_KEY;
   //login
   const login=({...crediential})=> {
-    console.log(crediential)
-  console.log(`http://127.0.0.1:8000/api/login`, crediential);
-
      return axios.post(`http://127.0.0.1:8000/api/login`, crediential)
   }
   const access2=()=> {
