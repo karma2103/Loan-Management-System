@@ -150,7 +150,7 @@ const FirebaseLogin = ({ ...others }) => {
               sx={{ ...theme.typography.customInput }}
             >
               <InputLabel htmlFor="outlined-adornment-user_id-login">
-                Employee ID
+                User Name
               </InputLabel>
               <OutlinedInput
                 id="outlined-adornment-user_id-login"
@@ -159,7 +159,7 @@ const FirebaseLogin = ({ ...others }) => {
                 name="user_id"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                label="Employee ID"
+                label="User Name"
                 size="small"
               />
               {touched.user_id && errors.user_id && (

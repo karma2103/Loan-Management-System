@@ -31,13 +31,18 @@ export const AuthProvider = ({ children }) => {
   
   if ( Object.keys(auth).length !==0) {
     setSession(auth);
+    console.log("gsjqfdhwfd") 
+  
   }
 
   useEffect(() => {
     ( () => {
       try {
         const accessToken = window.localStorage.getItem("accessToken");
+
         if (accessToken && isValidToken(accessToken)) {
+          console.log("gsjqfdhwfd")
+          setSession(accessToken);
           navigate("/");
         }else{
           navigate("/Lms/login");
