@@ -79,6 +79,7 @@ const FirebaseLogin = ({ ...others }) => {
           const accessToken  = response['data'].access_token;
           console.log(accessToken)
           setAuth(response['data'].access_token)
+          navigate('/');
         };
       })
         .catch((error)=>{

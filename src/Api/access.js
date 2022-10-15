@@ -8,6 +8,7 @@ import axios from "axios";
 
      return axios.post(`http://127.0.0.1:8000/api/login`, crediential)
   }
+  
   const access2=()=> {
     // console.log("crenditial2");
     // return axios.post(`${Api}/user_login`, crenditial);
