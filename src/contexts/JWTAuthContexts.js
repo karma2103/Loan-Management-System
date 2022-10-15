@@ -34,10 +34,12 @@ export const AuthProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    ( () => {
+    (async () => {
       try {
         const accessToken = window.localStorage.getItem("accessToken");
+
         if (accessToken && isValidToken(accessToken)) {
+          setSession(accessToken);
           navigate("/");
         }else{
           navigate("/Lms/login");
@@ -46,7 +48,7 @@ export const AuthProvider = ({ children }) => {
         console.error(err);
         navigate("/Lms/login");
       }
-    })();
+    })()
   }, []);
 
   return (

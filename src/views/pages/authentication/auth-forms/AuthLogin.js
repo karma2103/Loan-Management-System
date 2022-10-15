@@ -41,6 +41,7 @@ import MainCard from "ui-component/cards/MainCard";
 
 //loginFun
 import {login}  from '../../../../Api/access';
+import { useNavigate } from "react-router";
 // ============================|| FIREBASE - LOGIN ||============================ //
 
 const FirebaseLogin = ({ ...others }) => {
@@ -48,7 +49,7 @@ const FirebaseLogin = ({ ...others }) => {
     // Forgot Password
   const [open, setOpen] = useState(false);
   const [scroll, setScroll] = useState("paper");
-
+  const navigate = useNavigate();
   const scriptedRef = useScriptRef();
   const [checked, setChecked] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
@@ -73,11 +74,8 @@ const FirebaseLogin = ({ ...others }) => {
     const userlogin = (user_id,password)=>{
       const crediential = {user_id,password}
       login(crediential).then((response)=>{
-        console.log(response);
         if(!response.status === 200) throw new Error(response.status);
         else {
-          const accessToken  = response['data'].access_token;
-          console.log(accessToken)
           setAuth(response['data'].access_token)
           navigate('/');
         };
@@ -151,7 +149,7 @@ const FirebaseLogin = ({ ...others }) => {
               sx={{ ...theme.typography.customInput }}
             >
               <InputLabel htmlFor="outlined-adornment-user_id-login">
-                Employee ID
+                User Name
               </InputLabel>
               <OutlinedInput
                 id="outlined-adornment-user_id-login"
@@ -160,7 +158,7 @@ const FirebaseLogin = ({ ...others }) => {
                 name="user_id"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                label="Employee ID"
+                label="User Name"
                 size="small"
               />
               {touched.user_id && errors.user_id && (
