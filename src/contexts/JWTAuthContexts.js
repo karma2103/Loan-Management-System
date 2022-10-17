@@ -45,10 +45,9 @@ export const AuthProvider = ({ children }) => {
           navigate("/Lms/login");
         }
       } catch (err) {
-        console.error(err);
         navigate("/Lms/login");
       }
-    })()
+    })();
   }, []);
 
   return (

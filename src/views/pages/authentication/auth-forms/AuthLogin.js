@@ -40,13 +40,13 @@ import AuthContext from "../../../../contexts/JWTAuthContexts";
 import MainCard from "ui-component/cards/MainCard";
 
 //loginFun
-import {login}  from '../../../../Api/access';
+import { login } from "../../../../Api/access";
 import { useNavigate } from "react-router";
 // ============================|| FIREBASE - LOGIN ||============================ //
 
 const FirebaseLogin = ({ ...others }) => {
-    const theme = useTheme();
-    // Forgot Password
+  const theme = useTheme();
+  // Forgot Password
   const [open, setOpen] = useState(false);
   const [scroll, setScroll] = useState("paper");
   const navigate = useNavigate();
@@ -54,6 +54,7 @@ const FirebaseLogin = ({ ...others }) => {
   const [checked, setChecked] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const { setAuth } = useContext(AuthContext);
+  
   const handleClick = (scrollType) => () => {
     setOpen(true);
     setScroll(scrollType);
@@ -62,29 +63,25 @@ const FirebaseLogin = ({ ...others }) => {
   const handleClose = () => {
     setOpen(false);
   };
-  
-    const handleClickShowPassword = () => {
-        setShowPassword(!showPassword);
-    };
 
-    const handleMouseDownPassword = (event) => {
-        event.preventDefault();
-    };
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
 
-    const userlogin = (user_id,password)=>{
-      const crediential = {user_id,password}
-      login(crediential).then((response)=>{
-        if(!response.status === 200) throw new Error(response.status);
-        else {
-          setAuth(response['data'].access_token)
-          navigate('/');
-        };
-      })
-        .catch((error)=>{
-         console.log(error.message)
-      });
-    }
-  
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
+  const userlogin = (user_id, password) => {
+    const crediential = { user_id, password };
+    login(crediential).then((response) => {
+      if (!response.status === 200) throw new Error(response.status);
+      else {
+        setAuth(response["data"].access_token);
+        navigate("/");
+      }
+    });
+  };
 
   return (
     <>
@@ -111,9 +108,7 @@ const FirebaseLogin = ({ ...others }) => {
           submit: null,
         }}
         validationSchema={Yup.object().shape({
-          user_id: Yup.string()
-            .max(255)
-            .required("user_id is required"),
+          user_id: Yup.string().max(255).required("user is required"),
           password: Yup.string().max(255).required("Password is required"),
         })}
         onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
@@ -270,11 +265,7 @@ const FirebaseLogin = ({ ...others }) => {
                     Cancel
                   </Button>
 
-                  <Button
-                    type="submit"
-                    variant="outlined"
-                    color="secondary"
-                  >
+                  <Button type="submit" variant="outlined" color="secondary">
                     Submit
                   </Button>
                 </DialogActions>
