@@ -39,6 +39,9 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import AuthContext from "../../../../contexts/JWTAuthContexts";
 import MainCard from "ui-component/cards/MainCard";
 
+//loding button
+import { LoadingButton } from '@mui/lab';
+
 //loginFun
 import { login } from "../../../../Api/access";
 import { useNavigate } from "react-router";
@@ -73,7 +76,7 @@ const FirebaseLogin = ({ ...others }) => {
   };
 
   const userlogin = (user_id, password) => {
-    const crediential = { user_id, password };
+    const crediential = { user_id, password};
     login(crediential).then((response) => {
       if (!response.status === 200) throw new Error(response.status);
       else {
@@ -279,7 +282,7 @@ const FirebaseLogin = ({ ...others }) => {
 
             <Box sx={{ mt: 2 }}>
               <AnimateButton>
-                <Button
+                <LoadingButton 
                   disableElevation
                   disabled={isSubmitting}
                   fullWidth
@@ -289,7 +292,7 @@ const FirebaseLogin = ({ ...others }) => {
                   color="secondary"
                 >
                   Sign in
-                </Button>
+                </LoadingButton>
               </AnimateButton>
             </Box>
           </form>

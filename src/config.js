@@ -4,7 +4,8 @@ const config = {
     basename: '/',
     defaultPath: '/',
     fontFamily: `'Roboto', sans-serif`,
-    borderRadius: 12
+    borderRadius: 12,
+    API_KEY: 'http://127.0.0.1:8000/api/',
 };
 
 export default config;

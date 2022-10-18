@@ -1,10 +1,16 @@
 
 import axios from "axios";
-  // const Api = process.env.REACT_APP_API_KEY;
+
+import Config from 'config';
   //login
-  const login=({...crediential})=> {
-     return axios.post(`http://127.0.0.1:8000/api/login`, crediential)
-  }
+  const login= async({...crediential})=> {
+    console.log(Config.API_KEY);
+     return await axios.post(`${Config.API_KEY}/login`,crediential);
+  };
+ 
+  const registration = ({...userDetails })=> {
+    // return axios.post(`${Api}/user-registration`, userDetails);
+  };
   
   const access2=()=> {
     // console.log("crenditial2");
@@ -16,4 +22,4 @@ import axios from "axios";
 //     // return axios.post(`${Api}/user_login`, crenditial);
 //   };
 
-export  {login,access2};
+export  {login,registration,access2};

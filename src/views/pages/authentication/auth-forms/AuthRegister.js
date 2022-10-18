@@ -34,6 +34,7 @@ import { strengthColor, strengthIndicator } from 'utils/password-strength';
 // assets
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { registration } from "../../../../Api/access";
 
 // ===========================|| FIREBASE - REGISTER ||=========================== //
 
@@ -46,7 +47,6 @@ const FirebaseRegister = () => {
 
     const [strength, setStrength] = useState(0);
     const [level, setLevel] = useState();
-
 
     const handleClickShowPassword = () => {
         setShowPassword(!showPassword);
@@ -70,6 +70,17 @@ const FirebaseRegister = () => {
         console.log(e.target.value);
     };
 
+  const register = (userData) =>{
+    
+    registration(userData).then((response) => {
+
+      if (!response.status === 200) throw new Error(response.status);
+      else {
+        
+      }
+    });
+  }
+
 
     return (
         <>
@@ -82,29 +93,26 @@ const FirebaseRegister = () => {
             </Grid>
             <Formik
                 initialValues={{
-                    name: '',
-                    empid: '',
+                    employee_full_name: '',
+                    employment_id: '',
                     dzongkhag: '',
-                    mobile: '',
-                    phone: '',
-                    branch: '',
-                    address: '',
-                    cid: '',
-                    department: '',
+                    branch_id: '',
+                    department_id: '',
                     designation: '',
+                    phone_no: '',
                     email: '',
+                    user_id: '',
                     password: '',
                     submit: null
                 }}
                 validationSchema={Yup.object().shape({
-                    name: Yup.string().required('Name is required'),
-                    empid: Yup.string().max(15).required('Emp-id is required'),
+                    employee_full_name: Yup.string().required('Name is required'),
+                    employment_id: Yup.string().max(15).required('Employee id is required'),
                     dzongkhag: Yup.string().required('Dzongkhag is required'),
-                    mobile: Yup.number().required('Mobile No is required'),
-                    branch: Yup.string().required('branch is required'),
-                    address: Yup.string().required('Address is required'),
-                    cid: Yup.number().required('Cid is required'),
-                    department: Yup.array().min(1).of(Yup.string().required()).required('Department is required'),
+                    phone_no: Yup.number().required('Mobile No is required'),
+                    branch_id: Yup.string().required('branch is required'),
+                    user_id: Yup.string().required('User id is required'),
+                    department_id: Yup.array().min(1).of(Yup.string().required()).required('Department is required'),
                     designation: Yup.string().required('Designation is required'),
                     email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
                     password: Yup.string().max(255).min(8).required('Password is required')
@@ -113,6 +121,7 @@ const FirebaseRegister = () => {
                     try {
                         if (scriptedRef.current) {
                             setStatus({ success: true });
+                            register(values);
                             setSubmitting(false);
                         }
                     } catch (err) {
@@ -133,7 +142,7 @@ const FirebaseRegister = () => {
                                     fullWidth
                                     label="Name"
                                     margin="normal"
-                                    name="name"
+                                    name="employee_full_name"
                                     onBlur={handleBlur}
                                     onChange={(e) => {
                                         handleChange(e);
@@ -154,7 +163,7 @@ const FirebaseRegister = () => {
                                     fullWidth
                                     label="Emp-Id"
                                     margin="normal"
-                                    name="empid"
+                                    name="employment_id"
                                     onBlur={handleBlur}
                                     onChange={(e) => {
                                         handleChange(e);
@@ -172,27 +181,24 @@ const FirebaseRegister = () => {
                             </Grid>
                         </Grid>
                         <Grid container spacing={matchDownSM ? 0 : 2}>
-                            <Grid item xs={12} sm={6}>
+                        <Grid item xs={12} sm={6}>
                                 <TextField
                                     fullWidth
-                                    label="Dzongkhag"
+                                    label="Phone No."
                                     margin="normal"
-                                    name="dzongkhag"
+                                    name="phone"
+                                    type="number"
                                     onBlur={handleBlur}
                                     onChange={(e) => {
                                         handleChange(e);
                                         onChangeHandler(e)
                                     }}
-                                    type="text"
 
 
                                 />
-                                {touched.dzongkhag && errors.dzongkhag && (
-                                    <FormHelperText error id="standard-weight-helper-text--register">
-                                        {errors.dzongkhag}
-                                    </FormHelperText>
-                                )}
+
                             </Grid>
+
                             <Grid item xs={12} sm={6}>
                                 <TextField
                                     fullWidth
@@ -216,21 +222,30 @@ const FirebaseRegister = () => {
                             </Grid>
                         </Grid>
                         <Grid container spacing={matchDownSM ? 0 : 2}>
+                         
                             <Grid item xs={12} sm={6}>
+                             
                                 <TextField
+                                    id='select'
                                     fullWidth
-                                    label="Phone No."
-                                    margin="normal"
-                                    name="phone"
-                                    type="number"
+                                    label="Department"
+                                    margin='normal'
                                     onBlur={handleBlur}
                                     onChange={(e) => {
                                         handleChange(e);
                                         onChangeHandler(e)
                                     }}
-
-
-                                />
+                                    select
+                                >
+                                    <MenuItem value='IT department'>IT department</MenuItem>
+                                    <MenuItem value="Claims Department">Claims Department </MenuItem>
+                                    <MenuItem value="Finance Department">Finance Department</MenuItem>
+                                </TextField>
+                                {touched.department && errors.department && (
+                                    <FormHelperText error id="standard-weight-helper-text--register">
+                                        {errors.department}
+                                    </FormHelperText>
+                                )}
 
                             </Grid>
                             <Grid item xs={12} sm={6}>
@@ -292,8 +307,6 @@ const FirebaseRegister = () => {
                                         handleChange(e);
                                         onChangeHandler(e)
                                     }}
-
-
                                 />
                                 {touched.cid && errors.cid && (
                                     <FormHelperText error id="standard-weight-helper-text--register">
