@@ -34,7 +34,7 @@ import { strengthColor, strengthIndicator } from 'utils/password-strength';
 // assets
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { registration } from "../../../../Api/access";
+// import { registration } from "../../../../Api/access";
 
 // ===========================|| FIREBASE - REGISTER ||=========================== //
 
@@ -72,13 +72,13 @@ const FirebaseRegister = () => {
 
   const register = (userData) =>{
     
-    registration(userData).then((response) => {
+    // registration(userData).then((response) => {
 
-      if (!response.status === 200) throw new Error(response.status);
-      else {
+    //   if (!response.status === 200) throw new Error(response.status);
+    //   else {
         
-      }
-    });
+    //   }
+    // });
   }
 
 

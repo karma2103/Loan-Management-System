@@ -17,11 +17,11 @@ const UtilsTablerIcons = Loadable(lazy(() => import("views/utilities/TablerIcons
 // sample page routing
 const SamplePage = Loadable(lazy(() => import("views/sample-page")));
 
-const User = Loadable(lazy(() => import("views/pages/authentication/user/user")));
-const Role = Loadable(lazy(() => import("views/pages/authentication/user/role")));
-const Permission = Loadable(lazy(() => import("views/pages/authentication/user/permission")));
-const Department = Loadable(lazy(() => import("views/pages/authentication/user/department")));
-const Branch = Loadable(lazy(() => import("views/pages/authentication/user/branch")));
+const User = Loadable(lazy(() => import("views/user/user")));
+const Role = Loadable(lazy(() => import("views/user/role")));
+const Permission = Loadable(lazy(() => import("views/user/permission")));
+const Department = Loadable(lazy(() => import("views/master/department")));
+const Branch = Loadable(lazy(() => import("views/master/branch")));
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
@@ -30,27 +30,27 @@ const MainRoutes = {
   children: [
     
     {
-      path: "/",
+      path: "/Lms/dashboard",
       element: <DashboardDefault />,
     },
     {
-      path: "/dashboard/user",
+      path: "/Lms/user",
       element: <User />,
     },
     {
-      path: "/dashboard/role",
+      path: "/Lms/role",
       element: <Role />,
     },
     {
-      path: "/dashboard/permission",
+      path: "/Lms/permission",
       element: <Permission />,
     },
     {
-      path: "/dashboard/department",
+      path: "/Lms/department",
       element: <Department />,
     },
     {
-      path: "/dashboard/branch",
+      path: "/Lms/branch",
       element: <Branch />,
     },
 

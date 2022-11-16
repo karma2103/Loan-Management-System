@@ -43,7 +43,7 @@ import MainCard from "ui-component/cards/MainCard";
 import { LoadingButton } from '@mui/lab';
 
 //loginFun
-import { login } from "../../../../Api/access";
+import  login  from "../../../../Api/access";
 import { useNavigate } from "react-router";
 // ============================|| FIREBASE - LOGIN ||============================ //
 
@@ -81,7 +81,7 @@ const FirebaseLogin = ({ ...others }) => {
       if (!response.status === 200) throw new Error(response.status);
       else {
         setAuth(response["data"].access_token);
-        navigate("/");
+        navigate("/Lms/dashboard");
       }
     });
   };

@@ -5,11 +5,11 @@ import Loadable from "ui-component/Loadable";
 import MinimalLayout from "layout/MinimalLayout";
 
 // login option 3 routing
-const User = Loadable(lazy(() => import("views/pages/authentication/user/user")));
-const Role = Loadable(lazy(() => import("views/pages/authentication/user/role")));
-const Permission = Loadable(lazy(() => import("views/pages/authentication/user/permission")));
-const Department = Loadable(lazy(() => import("views/pages/authentication/user/department")));
-const Branch = Loadable(lazy(() => import("views/pages/authentication/user/branch")));
+const User = Loadable(lazy(() => import("views/user/user")));
+const Role = Loadable(lazy(() => import("views/user/role")));
+const Permission = Loadable(lazy(() => import("views/user/permission")));
+const Department = Loadable(lazy(() => import("views/master/department")));
+const Branch = Loadable(lazy(() => import("views/master/branch")));
 // ==============================|| AUTHENTICATION ROUTING ||============================== //
 
 const Users = {
@@ -17,23 +17,23 @@ const Users = {
   element: <MinimalLayout />,
   children: [
     {
-      path: "/dashboard/user",
+      path: "/Lms/dashboard/user",
       element: <User />,
     },
     {
-      path: "/dashboard/role",
+      path: "/Lms/dashboard/role",
       element: <Role />,
     },
     {
-      path: "/dashboard/permission",
+      path: "/Lms/dashboard/permission",
       element: <Permission />,
     },
     {
-      path: "/dashboard/department",
+      path: "/Lms/dashboard/department",
       element: <Department />,
     },
     {
-      path: "/dashboard/branch",
+      path: "/Lms/dashboard/branch",
       element: <Branch />,
     },
   ],

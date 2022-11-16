@@ -9,5 +9,6 @@ import Authentication from './Authentication';
 // ==============================|| ROUTING RENDER ||============================== //
 
 export default function ThemeRoutes() {
-    return useRoutes([MainRoutes, Users,Authentication ], config.basename);
+    return useRoutes([MainRoutes, Users,Authentication], config.basename);
+
 }

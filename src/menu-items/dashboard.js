@@ -15,7 +15,7 @@ const dashboard = {
             id: 'default',
             title: 'Dashboard',
             type: 'item',
-            url: '/',
+            url: '/Lms/dashboard',
             icon: icons.HomeIcon,
             breadcrumbs: false
         }

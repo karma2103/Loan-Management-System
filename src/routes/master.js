@@ -5,8 +5,8 @@ import Loadable from "ui-component/Loadable";
 import MainLayout from "layout/MainLayout";
 
 // login option 3 routing
-const Department = Loadable(lazy(() => import("views/pages/authentication/user/department")));
-const Branch = Loadable(lazy(() => import("views/pages/authentication/user/branch")));
+const Department = Loadable(lazy(() => import("views/master/department")));
+const Branch = Loadable(lazy(() => import("views/master/branch")));
 // ==============================|| AUTHENTICATION ROUTING ||============================== //
 
 const Master = {
@@ -14,11 +14,11 @@ const Master = {
   element: <MainLayout />,
   children: [
     {
-      path: "/master/department",
+      path: "/Lms/master/department",
       element: <Department />,
     },
     {
-      path: "/master/branch",
+      path: "/Lms/master/branch",
       element: <Branch />,
     },
   ],

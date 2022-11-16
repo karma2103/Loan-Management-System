@@ -40,7 +40,7 @@ export const AuthProvider = ({ children }) => {
 
         if (accessToken && isValidToken(accessToken)) {
           setSession(accessToken);
-          navigate("/");
+          navigate("/Lms/dashboard");
         }else{
           navigate("/Lms/login");
         }

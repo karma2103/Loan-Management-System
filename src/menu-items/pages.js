@@ -31,7 +31,7 @@ const pages = {
                     id: 'user',
                     title: 'User',
                     type: 'item',
-                    url: '/dashboard/user',
+                    url: '/Lms/user',
                     breadcrumbs: false,
                    
                 },
@@ -39,20 +39,19 @@ const pages = {
                     id: 'Role',
                     title: 'Role',
                     type: 'item',
-                    url: '/dashboard/role',
+                    url: '/Lms/role',
                     breadcrumbs: false,
                 },
                 {
                     id: 'permission ',
                     title: 'Permission',
                     type: 'item',
-                    url: '/dashboard/permission',
+                    url: '/Lms/permission',
                     breadcrumbs: false,
-                },
-                
-               
+                },  
             ],
         },
+        
         {
             id: 'pages',
             title: 'Master Setup',
@@ -63,20 +62,19 @@ const pages = {
                     id: 'department',
                     title: 'Department',
                     type: 'item',
-                    url: '/dashboard/department',
+                    url: '/Lms/department',
                     breadcrumbs: false
                 },
                 {
                     id: 'Branch',
                     title: 'Branch',
                     type: 'item',
-                    url: '/dashboard/branch',
+                    url: '/Lms/branch',
                     breadcrumbs: false
                 }
             ]
         }
     ]
-    
 };
 
 export default pages;
