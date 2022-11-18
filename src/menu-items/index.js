@@ -1,12 +1,13 @@
 import dashboard from './dashboard';
-import pages from './pages';
 import utilities from './utilities';
 import other from './other';
+import audittrails from './audittrail';
+import usermanagement from './usermanagement';
 
 // ==============================|| MENU ITEMS ||============================== //
 
 const menuItems = {
-    items: [dashboard, pages, utilities, other]
+    items: [dashboard, usermanagement, utilities, other,audittrails]
 };
 
 export default menuItems;

@@ -16,12 +16,6 @@ const UtilsTablerIcons = Loadable(lazy(() => import("views/utilities/TablerIcons
 
 // sample page routing
 const SamplePage = Loadable(lazy(() => import("views/sample-page")));
-
-const User = Loadable(lazy(() => import("views/pages/authentication/user/user")));
-const Role = Loadable(lazy(() => import("views/pages/authentication/user/role")));
-const Permission = Loadable(lazy(() => import("views/pages/authentication/user/permission")));
-const Department = Loadable(lazy(() => import("views/pages/authentication/user/department")));
-const Branch = Loadable(lazy(() => import("views/pages/authentication/user/branch")));
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
@@ -33,27 +27,6 @@ const MainRoutes = {
       path: "/",
       element: <DashboardDefault />,
     },
-    {
-      path: "/dashboard/user",
-      element: <User />,
-    },
-    {
-      path: "/dashboard/role",
-      element: <Role />,
-    },
-    {
-      path: "/dashboard/permission",
-      element: <Permission />,
-    },
-    {
-      path: "/dashboard/department",
-      element: <Department />,
-    },
-    {
-      path: "/dashboard/branch",
-      element: <Branch />,
-    },
-
     {
       path: "/utils/util-typography",
       element: <UtilsTypography />,

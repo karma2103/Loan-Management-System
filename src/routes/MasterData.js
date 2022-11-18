@@ -5,23 +5,23 @@ import Loadable from "ui-component/Loadable";
 import MainLayout from "layout/MainLayout";
 
 // login option 3 routing
-const Department = Loadable(lazy(() => import("views/pages/authentication/user/department")));
-const Branch = Loadable(lazy(() => import("views/pages/authentication/user/branch")));
+const Department = Loadable(lazy(() => import("views/pages/master-data/Department")));
+const Branch = Loadable(lazy(() => import("views/pages/master-data/Branch")));
 // ==============================|| AUTHENTICATION ROUTING ||============================== //
 
-const Master = {
+const MasterData = {
   path: "/",
   element: <MainLayout />,
   children: [
     {
-      path: "/master/department",
+      path: "/master-data/department",
       element: <Department />,
     },
     {
-      path: "/master/branch",
+      path: "/master-data/branch",
       element: <Branch />,
     },
   ],
 };
 
-export default Master;
+export default MasterData;

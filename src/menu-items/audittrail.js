@@ -17,64 +17,42 @@ const icons = {
 // ==============================|| EXTRA PAGES MENU ITEMS ||============================== //
 
 const pages = {
-    id: 'pages',
-    title: 'Authentication',
+    id: 'audittrail',
+    title: 'Audit Trails',
     type: 'group',
     children: [
         {
             id: 'page',
-            title: 'Users',
+            title: 'Log Management',
             type: 'collapse',
             icon: icons.GroupAddOutlinedIcon,
             children: [
                 {
                     id: 'user',
-                    title: 'User',
+                    title: 'User Log',
                     type: 'item',
-                    url: '/dashboard/user',
+                    url: '/audit-trail/user-log',
                     breadcrumbs: false,
                    
                 },
                 {
-                    id: 'Role',
-                    title: 'Role',
+                    id: 'loan',
+                    title: 'Loan Log',
                     type: 'item',
-                    url: '/dashboard/role',
+                    url: '/log-management/loan',
                     breadcrumbs: false,
                 },
                 {
-                    id: 'permission ',
-                    title: 'Permission',
+                    id: 'test ',
+                    title: 'test',
                     type: 'item',
-                    url: '/dashboard/permission',
+                    url: '/log-management/permission',
                     breadcrumbs: false,
                 },
                 
                
             ],
         },
-        {
-            id: 'pages',
-            title: 'Master Setup',
-            type: 'collapse',
-            icon: icons.SchoolOutlinedIcon,
-            children: [
-                {
-                    id: 'department',
-                    title: 'Department',
-                    type: 'item',
-                    url: '/dashboard/department',
-                    breadcrumbs: false
-                },
-                {
-                    id: 'Branch',
-                    title: 'Branch',
-                    type: 'item',
-                    url: '/dashboard/branch',
-                    breadcrumbs: false
-                }
-            ]
-        }
     ]
     
 };
