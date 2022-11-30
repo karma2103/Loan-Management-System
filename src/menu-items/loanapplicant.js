@@ -17,40 +17,23 @@ const icons = {
 // ==============================|| EXTRA PAGES MENU ITEMS ||============================== //
 
 const pages = {
-    id: 'audittrail',
-    title: 'Audit Trails',
+    id: 'applicant',
+    title: 'Loan Applicant Setup',
     type: 'group',
     children: [
         {
             id: 'page',
-            title: 'Log Management',
+            title: 'Loan Applicant List',
             type: 'collapse',
             icon: icons.GroupAddOutlinedIcon,
             children: [
                 {
-                    id: 'user',
-                    title: 'User Log',
+                    id: 'applicant',
+                    title: 'Applicant Lists',
                     type: 'item',
-                    url: '/audit-trail/user-log',
-                    breadcrumbs: false,
-                   
-                },
-                {
-                    id: 'loan',
-                    title: 'Loan Log',
-                    type: 'item',
-                    url: '/log-management/loan',
+                    url: '/loan-applicant/lists',
                     breadcrumbs: false,
                 },
-                {
-                    id: 'test ',
-                    title: 'test',
-                    type: 'item',
-                    url: '/log-management/permission',
-                    breadcrumbs: false,
-                },
-                
-               
             ],
         },
     ]

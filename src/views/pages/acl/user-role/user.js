@@ -7,69 +7,6 @@ import { GridActionsCellItem } from "@mui/x-data-grid";
 import MainCard from "ui-component/cards/MainCard";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, CardContent, CardHeader, Checkbox, Dialog, DialogActions, DialogContent, DialogContentText, Divider, FormControlLabel, Grid, TextField } from "@mui/material";
-const columns = [
-  {
-    name: "name",
-    label: "Name",
-    options: {
-      filter: true,
-      sort: true,
-    },
-  },
-  {
-    name: "company",
-    label: "Company",
-    options: {
-      filter: true,
-      sort: true,
-    },
-  },
-  {
-    name: "city",
-    label: "City",
-    options: {
-      filter: true,
-      sort: true,
-    },
-  },
-  {
-    name: "state",
-    label: "State",
-    options: {
-      filter: true,
-      sort: true,
-    },
-  },
-  {
-    name: "Action",
-    options: {
-      filter: false,
-      sort: false,
-      empty: true,
-      customBodyRender: () => {
-        return (
-          <Box>
-            <GridActionsCellItem icon={<EditIcon />} />
-            <GridActionsCellItem icon={<DeleteIcon />} />
-          </Box>
-        );
-      },
-    },
-  },
-
-];
-
-const data = [
-  {
-    name: "Karma Tshewang",
-    company: "Test Corp",
-    city: "Yonkers",
-    state: "NY",
-  },
-  { name: "John Walsh", company: "Test Corp", city: "Hartford", state: "CT" },
-  { name: "Bob Herm", company: "Test Corp", city: "Tampa", state: "FL" },
-  { name: "James Houston", company: "Test Corp", city: "Dallas", state: "TX" },
-];
 
 const options = {
   filter: true,
@@ -81,17 +18,97 @@ const useStyles = makeStyles({
   root: {
     background: "none",
     boxShadow: "none",
+    textAlign: "center",
   },
   
 });
-export default function DataTable() {
+export default function User() {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-  const [scroll, setScroll] = React.useState('paper');
+  const [open, setOpen] = React.useState({
+    status: false,
+    title: ''
+  });
 
-  const handleClickOpen = (scrollType) => () => {
-    setOpen(true);
-    setScroll(scrollType);
+
+const columns = [
+  {
+    name: "name",
+    label: "Name",
+    options: {
+      filter: true,
+      sort: true,
+    },
+  },
+  {
+    name: "department",
+    label: "Department",
+    options: {
+      filter: true,
+      sort: true,
+    },
+  },
+  {
+    name: "branch",
+    label: "Branch Name",
+    options: {
+      filter: true,
+      sort: true,
+    },
+  },
+  {
+    name: "designation",
+    label: "Designation",
+    options: {
+      filter: true,
+      sort: true,
+    },
+  },
+  {
+    name: "phone",
+    label: "PhoneNo",
+    options: {
+      filter: true,
+      sort: true,
+    },
+  },
+  {
+    name: "role",
+    label: "Role",
+    options: {
+      filter: true,
+      sort: true,
+    },
+  },
+
+  {
+    name: "Action",
+    options: {
+      filter: false,
+      sort: false,
+      empty: true,
+      customBodyRender: () => {
+        return (
+          <Box>
+            <GridActionsCellItem icon={<EditIcon />} sx={{ fontSize: 28 }} onClick={()=>handleClickOpen('Edit User')} />
+            <GridActionsCellItem icon={<DeleteIcon />} sx={{ fontSize: 28 }} />
+          </Box>
+        );
+      },
+    },
+  },
+];
+
+const data = [
+  { name: "John Walsh", deaprtment: "Test Corp", branch: "Hartford", designation: "CT",phone:"12345" },
+  { name: "Bob Herm", department: "Test Corp", branch: "Tampa", designation: "FL", phone:"1234" },
+  { name: "James Houston", department: "Test Corp", branch: "Dallas", designation: "TX", phone:"124"},
+];
+
+  const handleClickOpen = (title) => {
+    setOpen({
+      status:true,
+      title: title,
+    });
   };
 
   const handleClose = () => {
@@ -99,8 +116,12 @@ export default function DataTable() {
   };
   return (
     <MainCard
-      title="User List"
-      secondary={<Button onClick={handleClickOpen('body')} sx={{ border: "1px solid" }}>Add User</Button>}
+      title="User Lists"
+      secondary={
+        <Button onClick={()=>handleClickOpen('Create User')} sx={{ border: "1px solid" }}>
+          Create
+        </Button>
+      }
     >
       <MUIDataTable
         className={classes.root}
@@ -109,9 +130,7 @@ export default function DataTable() {
         options={options}
       />
       <Dialog
-            open={open}
-            // onClose={handleClose}
-            scroll={scroll}
+            open={open.status}
             sx={{
               '& .MuiDialog-container': {
                 '& .MuiPaper-root': {
@@ -122,8 +141,7 @@ export default function DataTable() {
           >
             <DialogContent>
               <DialogContentText>
-                <MainCard title="Add User">
-                  <form noValidate>
+                <MainCard title={open.title}>
                     <Grid container spacing={2}>
                       <Grid item xs={12} sm={3}>
                         <TextField
@@ -154,7 +172,20 @@ export default function DataTable() {
                           type="text"
                           size="small"
                         />
+
                       </Grid>
+                      <Grid item xs={12} sm={3}>
+                        <TextField
+                          fullWidth
+                          label="Branch"
+                          margin="normal"
+                          name="branch"
+                          type="text"
+                          size="small"
+                        />
+                      </Grid>
+                    </Grid>
+                    <Grid container spacing={2}>
                       <Grid item xs={12} sm={3}>
                         <TextField
                           fullWidth
@@ -165,8 +196,6 @@ export default function DataTable() {
                           size="small"
                         />
                       </Grid>
-                    </Grid>
-                    <Grid container spacing={2}>
                       <Grid item xs={12} sm={3}>
                         <TextField
                           fullWidth
@@ -180,9 +209,9 @@ export default function DataTable() {
                       <Grid item xs={12} sm={3}>
                         <TextField
                           fullWidth
-                          label="Address"
+                          label="Email"
                           margin="normal"
-                          name="address"
+                          name="email"
                           type="text"
                           size="small"
                         />
@@ -190,15 +219,44 @@ export default function DataTable() {
                       <Grid item xs={12} sm={3}>
                         <TextField
                           fullWidth
-                          label="CID No."
+                          label="User Name"
                           margin="normal"
-                          name="cid"
-                          type="number"
+                          name="name"
+                          type="text"
                           size="small"
                         />
                       </Grid>
                     </Grid>
-                  </form>
+                    <Grid container spacing={2}>
+                      <Grid item xs={12} sm={3}>
+                        <TextField
+                          fullWidth
+                          label="Password"
+                          margin="normal"
+                          name="password"
+                          type="text"
+                          size="small"
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={3}>
+                        <TextField
+                          fullWidth
+                          label="Password Confirmation"
+                          margin="normal"
+                          name="password confirmation"
+                          type="text"
+                          size="small"
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={12}>
+                      <FormControlLabel
+                         
+                          label="IsActive"
+                          sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}
+                          control={<Checkbox />}
+                        />
+                      </Grid>
+                    </Grid>
                   <Divider sx={{ mt: 2 }}></Divider>
                   <CardHeader title="Role" />
                   <CardContent sx={{ mt: -4 }}>
@@ -234,6 +292,40 @@ export default function DataTable() {
                     </Grid>
                     
                   </CardContent>
+                  <Divider sx={{ mt: 2 }}></Divider>
+                  <CardHeader title="Permission" />
+                  <CardContent sx={{ mt: -4 }}>
+                    <Grid container spacing={2}>
+                      <Grid item xs={6} sm={3}>
+                        <FormControlLabel
+                          control={<Checkbox />}
+                          label="Admin"
+                          sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}
+                        />
+                      </Grid>
+                      <Grid item xs={6} sm={3}>
+                        <FormControlLabel
+                          control={<Checkbox />}
+                          label="Admin"
+                          sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}
+                        />
+                      </Grid>
+                      <Grid item xs={6} sm={3}>
+                        <FormControlLabel
+                          control={<Checkbox />}
+                          label="Admin"
+                          sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}
+                        />
+                      </Grid>
+                      <Grid item xs={6} sm={3}>
+                        <FormControlLabel
+                          control={<Checkbox />}
+                          label="Admin"
+                          sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }}
+                        />
+                      </Grid>
+                    </Grid>
+                  </CardContent>
                 </MainCard>
               </DialogContentText>
             </DialogContent>
@@ -242,11 +334,27 @@ export default function DataTable() {
                 Cancel
               </Button>
 
-              <Button onClick={handleClose} type="submit" variant="outlined" color="secondary">
-                Submit
-              </Button>
-            </DialogActions>
-          </Dialog>
-    </MainCard>
+            {open.title === 'Edit User'? 
+            <Button
+              onClick={handleClose}
+              type="submit"
+              variant="outlined"
+              color="secondary"
+            >
+              Update
+            </Button>
+            : 
+            <Button
+            onClick={handleClose}
+            type="submit"
+            variant="outlined"
+            color="secondary"
+          >
+            Submit
+          </Button>
+          } 
+          </DialogActions>
+        </Dialog>
+      </MainCard>
   );
 }

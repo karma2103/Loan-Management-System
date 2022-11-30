@@ -49,7 +49,7 @@ export const AuthProvider = ({ children }) => {
         navigate("/Lms/login");
       }
     })()
-  }, []);
+  }, [navigate]);
 
   return (
     <AuthContext.Provider value={{ auth, setAuth }}>

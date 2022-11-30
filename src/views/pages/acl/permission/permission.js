@@ -6,25 +6,32 @@ import DeleteIcon from "@mui/icons-material/DeleteOutlined";
 import { GridActionsCellItem } from "@mui/x-data-grid";
 import MainCard from "ui-component/cards/MainCard";
 import { makeStyles } from "@material-ui/core/styles";
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  Grid,
-  TextField,
-} from "@mui/material";
-const columns = [
-  {
-    name: "id",
-    label: "SI No",
-    options: {
-      filter: false,
-      sort: false,
-    },
+import {Button,Dialog,DialogActions,DialogContent,DialogContentText,Grid,TextField,} from "@mui/material";
+
+const options = {
+  filter: false,
+  download: false,
+  print: false,
+  viewColumns: false,
+  selectableRows: false,
+  fixedHeader :true
+};
+const useStyles = makeStyles({
+  root: {
+    background: "none",
+    boxShadow: "none",
+    textAlign: "center",
   },
-  {
+});
+export default function Permission() {
+  const classes = useStyles();
+  const [open, setOpen] = React.useState({
+    status: false,
+    title: ''
+  });
+
+const columns = [
+    {
     name: "name",
     label: "Permission Name",
     options: {
@@ -42,7 +49,7 @@ const columns = [
       customBodyRender: () => {
         return (
           <Box>
-            <GridActionsCellItem icon={<EditIcon />} sx={{ fontSize: 28 }} />
+            <GridActionsCellItem icon={<EditIcon />} sx={{ fontSize: 28 }} onClick={()=>handleClickOpen('Edit Permission')} />
             <GridActionsCellItem icon={<DeleteIcon />} sx={{ fontSize: 28 }} />
           </Box>
         );
@@ -52,35 +59,18 @@ const columns = [
 ];
 
 const data = [
-  { id: 1, name: "USer-List" },
-  { id: 2, name: "User-Create" },
-  { id: 3, name: "User-delete" },
-  { id: 4, name: "RoleList" },
+  {  name: "USer-List" },
+  {  name: "User-Create" },
+  { name: "User-delete" },
+  { name: "RoleList" },
 ];
 
-const options = {
-  filter: false,
-  download: false,
-  print: false,
-  viewColumns: false,
-  selectableRows: false,
-  fixedHeader :true
-};
-const useStyles = makeStyles({
-  root: {
-    background: "none",
-    boxShadow: "none",
-    textAlign: "center",
-  },
-});
-export default function DataTable() {
-  const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-  const [scroll, setScroll] = React.useState("paper");
 
-  const handleClickOpen = (scrollType) => () => {
-    setOpen(true);
-    setScroll(scrollType);
+  const handleClickOpen = (title) => {
+    setOpen({
+      status:true,
+      title: title,
+    });
   };
 
   const handleClose = () => {
@@ -88,9 +78,9 @@ export default function DataTable() {
   };
   return (
     <MainCard
-      title="Permission List"
+      title="Permission Lists"
       secondary={
-        <Button onClick={handleClickOpen("body")} sx={{ border: "1px solid" }}>
+        <Button onClick={()=>handleClickOpen('Create Permission')} sx={{ border: "1px solid" }}>
           Create
         </Button>
       }
@@ -104,9 +94,7 @@ export default function DataTable() {
 
       />
       <Dialog
-        open={open}
-        // onClose={handleClose}
-        scroll={scroll}
+        open={open.status}
         sx={{
           "& .MuiDialog-container": {
             "& .MuiPaper-root": {
@@ -117,12 +105,12 @@ export default function DataTable() {
       >
         <DialogContent sx={{ width: "500px" }}>
           <DialogContentText>
-            <MainCard title="Create">
+            <MainCard title={open.title}>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={12}>
                   <TextField
                     fullWidth
-                    label="Permission List"
+                    label="Permission Name"
                     name="name"
                     type="text"
                     autoFocus
@@ -137,7 +125,17 @@ export default function DataTable() {
             Cancel
           </Button>
 
-          <Button
+          {open.title === 'Edit Permission'? 
+            <Button
+              onClick={handleClose}
+              type="submit"
+              variant="outlined"
+              color="secondary"
+            >
+              Update
+            </Button>
+            : 
+            <Button
             onClick={handleClose}
             type="submit"
             variant="outlined"
@@ -145,8 +143,9 @@ export default function DataTable() {
           >
             Submit
           </Button>
-        </DialogActions>
-      </Dialog>
-    </MainCard>
+          } 
+          </DialogActions>
+        </Dialog>
+      </MainCard>
   );
 }

@@ -71,8 +71,8 @@ const FirebaseLogin = ({ ...others }) => {
         event.preventDefault();
     };
 
-    const userlogin = (user_id,password)=>{
-      const crediential = {user_id,password}
+    const userlogin = (user_name,password)=>{
+      const crediential = {user_name,password}
       login(crediential).then((response)=>{
         if(!response.status === 200) throw new Error(response.status);
         else {
@@ -98,7 +98,7 @@ const FirebaseLogin = ({ ...others }) => {
         >
           <Box sx={{ mb: 2, mt: -5 }}>
             <Typography variant="subtitle1">
-              Sign in with user_id address
+              Sign in with User Name and Password
             </Typography>
           </Box>
         </Grid>
@@ -106,21 +106,21 @@ const FirebaseLogin = ({ ...others }) => {
 
       <Formik
         initialValues={{
-          user_id: "",
+          user_name: "",
           password: "",
           submit: null,
         }}
         validationSchema={Yup.object().shape({
-          user_id: Yup.string()
+          user_name: Yup.string()
             .max(255)
-            .required("user_id is required"),
+            .required("user_name is required"),
           password: Yup.string().max(255).required("Password is required"),
         })}
         onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
           try {
             if (scriptedRef.current) {
               setStatus({ success: true });
-              userlogin(values.user_id, values.password);
+              userlogin(values.user_name, values.password);
               setSubmitting(false);
             }
           } catch (err) {
@@ -145,28 +145,28 @@ const FirebaseLogin = ({ ...others }) => {
           <form noValidate onSubmit={handleSubmit} {...others}>
             <FormControl
               fullWidth
-              error={Boolean(touched.user_id && errors.user_id)}
+              error={Boolean(touched.user_name && errors.user_name)}
               sx={{ ...theme.typography.customInput }}
             >
-              <InputLabel htmlFor="outlined-adornment-user_id-login">
+              <InputLabel htmlFor="outlined-adornment-user_name-login">
                 User Name
               </InputLabel>
               <OutlinedInput
-                id="outlined-adornment-user_id-login"
+                id="outlined-adornment-user_name-login"
                 type="text"
-                value={values.user_id}
-                name="user_id"
+                value={values.user_name}
+                name="user_name"
                 onBlur={handleBlur}
                 onChange={handleChange}
                 label="User Name"
                 size="small"
               />
-              {touched.user_id && errors.user_id && (
+              {touched.user_name && errors.user_name && (
                 <FormHelperText
                   error
-                  id="standard-weight-helper-text-user_id-login"
+                  id="standard-weight-helper-text-user_name-login"
                 >
-                  {errors.user_id}
+                  {errors.user_name}
                 </FormHelperText>
               )}
             </FormControl>

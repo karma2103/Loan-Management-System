@@ -7,15 +7,29 @@ import { GridActionsCellItem } from "@mui/x-data-grid";
 import MainCard from "ui-component/cards/MainCard";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, CardContent, CardHeader, Checkbox, Dialog, DialogActions, DialogContent, DialogContentText, Divider, FormControlLabel, Grid, TextField } from "@mui/material";
-const columns = [
-  {
-    name: "si",
-    label: "SI No",
-    options: {
-      filter: false,
-      sort: false,
-    },
+
+const options = {
+  filter: true,
+  download: true,
+  print: true,
+  viewColumns: true,
+};
+const useStyles = makeStyles({
+  root: {
+    background: "none",
+    boxShadow: "none",
+    textAlign: "center",
   },
+});
+
+export default function Role() {
+  const classes = useStyles();
+  const [open, setOpen] = React.useState({
+    status: false,
+    title: ''
+  });
+
+const columns = [
   {
     name: "role",
     label: "Role Name",
@@ -41,8 +55,8 @@ const columns = [
       customBodyRender: () => {
         return (
           <Box>
-            <GridActionsCellItem icon={<EditIcon />} />
-            <GridActionsCellItem icon={<DeleteIcon />} />
+            <GridActionsCellItem icon={<EditIcon />} sx={{ fontSize: 28 }} onClick={()=>handleClickOpen('Edit Role')} />
+            <GridActionsCellItem icon={<DeleteIcon />} sx={{ fontSize: 28 }} />
           </Box>
         );
       },
@@ -52,41 +66,30 @@ const columns = [
 ];
 
 const data = [
-  {si:"1", role: "John Walsh", permission: "Test Corp" },
-  {si:"2", role: "Bob Herm", permission: "Test Corp" },
-  { si:"3",role: "James Houston", permission: "Test Corp"},
+  { role: "John Walsh", permission: "Test Corp" },
+  { role: "Bob Herm", permission: "Test Corp" },
+  { role: "James Houston", permission: "Test Corp"},
 ];
 
-const options = {
-  filter: true,
-  download: true,
-  print: true,
-  viewColumns: true,
-};
-const useStyles = makeStyles({
-  root: {
-    background: "none",
-    boxShadow: "none",
-  },
-  
-});
-export default function DataTable() {
-  const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-  const [scroll, setScroll] = React.useState('paper');
-
-  const handleClickOpen = (scrollType) => () => {
-    setOpen(true);
-    setScroll(scrollType);
+  const handleClickOpen = (title)=> {
+    setOpen({
+      status:true,
+      title: title,
+    });
   };
 
   const handleClose = () => {
     setOpen(false);
   };
+
   return (
     <MainCard
       title="Role-Permission Lists"
-      secondary={<Button onClick={handleClickOpen('body')} sx={{ border: "1px solid" }}>Create</Button>}
+      secondary={
+        <Button onClick={()=>handleClickOpen('Create Role')} sx={{ border: "1px solid" }}>
+          Create
+        </Button>
+      }
     >
       <MUIDataTable
         className={classes.root}
@@ -95,9 +98,7 @@ export default function DataTable() {
         options={options}
       />
       <Dialog
-            open={open}
-            // onClose={handleClose}
-            scroll={scroll}
+            open={open.status}
             sx={{
               '& .MuiDialog-container': {
                 '& .MuiPaper-root': {
@@ -108,8 +109,7 @@ export default function DataTable() {
           >
             <DialogContent>
               <DialogContentText>
-                <MainCard title="Create Role">
-                  <form noValidate>
+                <MainCard title={open.title}>
                     <Grid container spacing={2}>
                       <Grid item xs={12} sm={12}>
                         <TextField
@@ -122,7 +122,6 @@ export default function DataTable() {
                         />
                       </Grid>
                     </Grid>
-                  </form>
                   <Divider sx={{ mt: 2 }}></Divider>
                   <CardHeader title="Permission" />
                   <CardContent sx={{ mt: -4 }}>
@@ -156,7 +155,6 @@ export default function DataTable() {
                         />
                       </Grid>
                     </Grid>
-                    
                   </CardContent>
                 </MainCard>
               </DialogContentText>
@@ -166,11 +164,27 @@ export default function DataTable() {
                 Cancel
               </Button>
 
-              <Button onClick={handleClose} type="submit" variant="outlined" color="secondary">
-                Submit
-              </Button>
-            </DialogActions>
-          </Dialog>
-    </MainCard>
+              {open.title === 'Edit Role'? 
+            <Button
+              onClick={handleClose}
+              type="submit"
+              variant="outlined"
+              color="secondary"
+            >
+              Update
+            </Button>
+            : 
+            <Button
+            onClick={handleClose}
+            type="submit"
+            variant="outlined"
+            color="secondary"
+          >
+            Submit
+          </Button>
+          } 
+          </DialogActions>
+        </Dialog>
+      </MainCard>
   );
 }

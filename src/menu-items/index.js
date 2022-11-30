@@ -1,7 +1,7 @@
 import dashboard from './dashboard';
 import utilities from './utilities';
 import other from './other';
-import audittrails from './audittrail';
+import audittrails from './loanapplicant';
 import usermanagement from './usermanagement';
 
 // ==============================|| MENU ITEMS ||============================== //

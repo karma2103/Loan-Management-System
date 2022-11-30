@@ -8,23 +8,15 @@ import MainCard from "ui-component/cards/MainCard";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button,Dialog,DialogActions,DialogContent,DialogContentText,Grid,TextField,} from "@mui/material";
 
-
-
-const data = [
-  { id: 1,code:'PA',  name: "Paro" },
-  { id: 2,code:'HA',  name: "Ha" },
-  { id: 3,code:'TH',  name: "Thimphu"},
-  { id: 4,code:'MO',  name: "Mongar"},
-];
-
 const options = {
   filter: false,
-  download: false,
-  print: false,
+  download: true,
+  print: true,
   viewColumns: false,
   selectableRows: false,
   fixedHeader :true
 };
+
 const useStyles = makeStyles({
   root: {
     background: "none",
@@ -40,14 +32,6 @@ export default function Branch() {
   });
 
   const columns = [
-    {
-      name: "id",
-      label: "Sl No",
-      options: {
-        filter: false,
-        sort: false,
-      },
-    },
     {
       name: "code",
       label: "Branch Code",
@@ -82,17 +66,24 @@ export default function Branch() {
     },
   ];
 
+  const data = [
+    { code:'PA',  name: "Paro" },
+    { code:'HA',  name: "Ha" },
+    { code:'TH',  name: "Thimphu"},
+    { code:'MO',  name: "Mongar"},
+  ];
+
   const handleClickOpen = (title) => {
     setOpen({
       status:true,
       title: title,
-     
     });
   };
 
   const handleClose = () => {
     setOpen(false);
   };
+  
   return (
     <MainCard
       title= 'Branch List'
@@ -150,7 +141,7 @@ export default function Branch() {
           <Button onClick={handleClose} variant="outlined" color="info">
             Cancel
           </Button>
-       {open.title == 'Edit Branch'? 
+       {open.title === 'Edit Branch'? 
           <Button
             onClick={handleClose}
             type="submit"
