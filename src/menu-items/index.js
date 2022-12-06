@@ -1,13 +1,13 @@
 import dashboard from './dashboard';
 import utilities from './utilities';
 import other from './other';
-import audittrails from './loanapplicant';
 import usermanagement from './usermanagement';
+import applicant from './loanapplicant';
 
 // ==============================|| MENU ITEMS ||============================== //
 
 const menuItems = {
-    items: [dashboard, usermanagement, utilities, other,audittrails]
+    items: [dashboard, usermanagement,applicant, utilities, other]
 };
 
 export default menuItems;

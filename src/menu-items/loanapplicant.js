@@ -16,7 +16,7 @@ const icons = {
 
 // ==============================|| EXTRA PAGES MENU ITEMS ||============================== //
 
-const pages = {
+const applicant = {
     id: 'applicant',
     title: 'Loan Applicant Setup',
     type: 'group',
@@ -37,7 +37,6 @@ const pages = {
             ],
         },
     ]
-    
 };
 
-export default pages;
+export default applicant;
